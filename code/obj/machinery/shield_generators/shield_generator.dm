@@ -31,7 +31,7 @@
 			if (!src.link)
 				var/turf/T = get_turf(src)
 				var/obj/machinery/power/data_terminal/test_link = locate() in T
-				if (test_link && !test_link.is_valid_master(test_link.master))
+				if (test_link && !DATA_TERMINAL_IS_VALID_MASTER(test_link, test_link.master))
 					src.link = test_link
 					src.link.master = src
 			src.net_id = generate_net_id(src)

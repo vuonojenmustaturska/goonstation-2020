@@ -395,7 +395,7 @@
 	proc
 		check_connection()
 			//if there is a link, it has a master, and the master is valid..
-			if(src.link && istype(src.link) && (src.link.master) && src.link.is_valid_master(src.link.master))
+			if(src.link && istype(src.link) && (src.link.master) && DATA_TERMINAL_IS_VALID_MASTER(src.link, src.link.master))
 				if(src.link.master == src)
 					return 1 //If it's already us, the connection is fine!
 				else//Otherwise welp no this thing is taken.
@@ -404,7 +404,7 @@
 			src.link = null
 			var/turf/T = get_turf(src)
 			var/obj/machinery/power/data_terminal/test_link = locate() in T
-			if(test_link && !test_link.is_valid_master(test_link.master))
+			if(test_link && !DATA_TERMINAL_IS_VALID_MASTER(test_link, test_link.master))
 				src.link = test_link
 				src.link.master = src
 				return 1

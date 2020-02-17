@@ -112,7 +112,7 @@
 		if(signal.transmission_method != TRANSMISSION_WIRE)
 			return
 
-		if(src.master && is_valid_master(src.master))
+		if(DATA_TERMINAL_IS_VALID_MASTER(src, src.master))
 			src.master.receive_signal(signal)
 
 		return
@@ -123,7 +123,7 @@
 			if(!src.powernet || !signal)
 				return
 
-			if(source != src.master || !is_valid_master(src.master))
+			if(source != src.master || !DATA_TERMINAL_IS_VALID_MASTER(src, src.master))
 				return
 
 			signal.transmission_method = TRANSMISSION_WIRE
@@ -148,18 +148,6 @@
 					if (!(signal in reusable_signals))
 						reusable_signals += signal
 			return
-
-		is_valid_master(obj/test_master)
-			if(!test_master)
-				//boutput(world, "no test master")
-				return 0
-
-			if(get_turf(test_master) != src.loc)
-				//boutput(world, "[test_master] isn't on the same turf")
-				return 0
-
-			//boutput(world, "[test_master] is a valid master")
-			return 1
 
 	hide(var/i)
 		invisibility = i ? 101 : 0

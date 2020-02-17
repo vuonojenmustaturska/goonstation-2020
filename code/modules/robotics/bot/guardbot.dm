@@ -259,7 +259,7 @@
 
 		vaquero
 			name = "El Vaquero"
-			desc = "The side label reads 'Fabricado en México'"
+			desc = "The side label reads 'Fabricado en Mï¿½xico'"
 			setup_unique_name = 1
 			setup_default_startup_task = /datum/computer/file/guardbot_task/security/patrol
 			setup_charge_percentage = 98
@@ -3206,7 +3206,7 @@
 			if(!src.link)
 				var/turf/T = get_turf(src)
 				var/obj/machinery/power/data_terminal/test_link = locate() in T
-				if(test_link && !test_link.is_valid_master(test_link.master))
+				if(test_link && !DATA_TERMINAL_IS_VALID_MASTER(test_link, test_link.master))
 					src.link = test_link
 					src.link.master = src
 
