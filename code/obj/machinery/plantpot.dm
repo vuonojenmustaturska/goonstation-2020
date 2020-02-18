@@ -68,6 +68,7 @@
 	density = 1
 	mats = 2
 	flags = NOSPLASH
+	processing_tier = PROCESSING_HALF
 	var/datum/plant/current = null // What is currently growing in the plant pot
 	var/datum/plantgenes/plantgenes = null // Set this up in New
 	var/tickcount = 0  // Automatic. Tracks how many ticks have elapsed, for CPU efficiency things.
@@ -143,7 +144,7 @@
 			update_icon()
 			update_name()
 
-		if (src.tickcount++ % 2)
+		if (!src.use_new_processing && src.tickcount++ % 2)
 			return
 			// We skip every other tick. Another cpu-conserving measure.
 		if (!src.current || src.dead)

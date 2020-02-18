@@ -57,6 +57,7 @@ var/global
 	list/doors = list()
 	list/allcables = list()
 	list/atmos_machines = list() // need another list to pull atmos machines out of the main machine loop and in with the pipe networks
+	list/bucketmachines = generate_machinery_processing_buckets()
 	list/processing_items = list()
 	list/processing_fluid_groups = list()
 	list/processing_fluid_spreads = list()

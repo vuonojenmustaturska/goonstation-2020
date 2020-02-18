@@ -20,12 +20,28 @@
 	var/power_credit = 0
 	var/wire_powered = 0
 	var/allow_stunned_dragndrop = 0
+	var/processing_bucket = 1
+	var/use_new_processing = 1
+	var/processing_tier = PROCESSING_FULL
+	var/current_processing_tier
 
 	// New() and disposing() add and remove machines from the global "machines" list
 	// This list is used to call the process() proc for all machines ~1 per second during a round
 
 /obj/machinery/New()
 	..()
+
+	var/static/processing_splitter = 1
+
+	use_new_processing = processing_splitter++ % 2
+
+	var/lastrefdigit = text2ascii("\ref[src]", 11) // Get the last digit of the byond reference, it will be used to divide less-than-full processing into roughly equal processing ticks
+	switch (lastrefdigit)
+		if (48 to 57) // 1 to 10
+			processing_bucket = lastrefdigit-47
+		else // a-f, 97-102 => 11 to 16
+			processing_bucket = lastrefdigit-86
+
 	SubscribeToProcess()
 	if (current_state > GAME_STATE_WORLD_INIT)
 		spawn(5)
@@ -41,10 +57,16 @@
 	..()
 
 /obj/machinery/proc/SubscribeToProcess()
-	machines.Add(src)
+	if (!use_new_processing)
+		machines.Add(src)
+	else
+		START_PROCESSING(src, src.processing_tier)
 
 /obj/machinery/proc/UnsubscribeProcess()
-	machines.Remove(src)
+	if (!use_new_processing)
+		machines.Remove(src)
+	else
+		STOP_PROCESSING(src)
 
 
 	/*

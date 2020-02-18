@@ -4,10 +4,10 @@ datum/controller/process/bucketmachines
 	var/tmp/list/pipe_networks
 	var/tmp/list/powernets
 	var/tmp/list/atmos_machines
-  var/tmp/ticker = 0
+	var/tmp/ticker = 0
 
 	setup()
-		name = "Machine"
+		name = "BucketMachine"
 		schedule_interval = 33
 
 		Station_VNet = new /datum/v_space/v_space_network()
@@ -68,19 +68,19 @@ datum/controller/process/bucketmachines
 #endif
 			if (!(c++ % 100))
 				scheck()
-    for (var/i in 2 to 4)
-      for(var/obj/machinery/machine in src.machines[i][(src.ticker % i)+1])
-        if( machine.z == 4 && !Z4_ACTIVE ) continue
-    #ifdef MACHINE_PROCESSING_DEBUG
-        var/t = world.time
-    #endif
-        machine.process()
-    #ifdef MACHINE_PROCESSING_DEBUG
-        register_machine_time(machine, world.time - t)
-    #endif
-        if (!(c++ % 100))
-          scheck()
-    src.ticker++
+		for (var/i in 2 to 5)
+			for(var/obj/machinery/machine in src.machines[i][(src.ticker % (1<<(i-1)))+1])
+				if( machine.z == 4 && !Z4_ACTIVE ) continue
+		#ifdef MACHINE_PROCESSING_DEBUG
+				var/t = world.time
+		#endif
+				machine.process()
+		#ifdef MACHINE_PROCESSING_DEBUG
+				register_machine_time(machine, world.time - t)
+		#endif
+				if (!(c++ % 100))
+					scheck()
+		src.ticker++
 
 #ifdef MACHINE_PROCESSING_DEBUG
 proc/register_machine_time(var/datum/machine, var/time)
