@@ -1,9 +1,9 @@
 // handles machines
 datum/controller/process/machines
+	var/tmp/list/machines
 	var/tmp/list/pipe_networks
 	var/tmp/list/powernets
 	var/tmp/list/atmos_machines
-	var/tmp/list/machines
 	var/tmp/ticker = 0
 
 	setup()
@@ -13,7 +13,7 @@ datum/controller/process/machines
 		Station_VNet = new /datum/v_space/v_space_network()
 
 	proc/d_print()
-		for(var/obj/machinery/machine in machines)
+		for(var/obj/machinery/machine in src.machines)
 			boutput(world,"[machine.name] : [machine.type]")
 
 	doWork()
