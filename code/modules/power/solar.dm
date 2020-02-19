@@ -72,6 +72,7 @@
 	anchored = 1
 	density = 1
 	directwired = 1
+	processing_tier = PROCESSING_QUARTER
 	var/health = 10.0
 	var/id = 1
 	var/obscured = 0
@@ -171,6 +172,8 @@
 
 	if(!obscured)
 		var/sgen = SOLARGENRATE * sunfrac
+		if (use_new_processing)
+			sgen *= 1<<(current_processing_tier-1) // twice the power for half processing, 4 times for quarter etc.
 		add_avail(sgen)
 		if(powernet && control)
 			if(control in powernet.nodes) //this line right here...
@@ -185,6 +188,7 @@
 /obj/machinery/power/solar/proc/broken()
 	status |= BROKEN
 	updateicon()
+	UnsubscribeProcess()
 	return
 
 /obj/machinery/power/solar/meteorhit()

@@ -1,23 +1,20 @@
 // handles machines
-datum/controller/process/machines
-	var/tmp/list/machines
+datum/controller/process/goose
 	var/tmp/list/pipe_networks
 	var/tmp/list/powernets
 	var/tmp/list/atmos_machines
 
 	setup()
-		name = "Machine"
+		name = "Goose"
 		schedule_interval = 33
 
-		Station_VNet = new /datum/v_space/v_space_network()
+		//Station_VNet = new /datum/v_space/v_space_network()
 
 	proc/d_print()
-		for(var/obj/machinery/machine in src.machines)
-			boutput(world,"[machine.name] : [machine.type]")
+
 
 	doWork()
-		var/c = 0
-/*		src.atmos_machines = global.atmos_machines
+		src.atmos_machines = global.atmos_machines
 		var/c = 0
 		for(var/obj/machinery/machine in atmos_machines)
 			if( machine.z == 4 && !Z4_ACTIVE ) continue
@@ -52,19 +49,6 @@ datum/controller/process/machines
 			PN.reset()
 #ifdef MACHINE_PROCESSING_DEBUG
 			register_machine_time(PN, world.time - t)
-#endif
-			if (!(c++ % 100))
-				scheck()
-*/
-		src.machines = global.machines
-		for(var/obj/machinery/machine in src.machines)
-			if( machine.z == 4 && !Z4_ACTIVE ) continue
-#ifdef MACHINE_PROCESSING_DEBUG
-			var/t = world.time
-#endif
-			machine.process()
-#ifdef MACHINE_PROCESSING_DEBUG
-			register_machine_time(machine, world.time - t)
 #endif
 			if (!(c++ % 100))
 				scheck()

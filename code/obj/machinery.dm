@@ -31,11 +31,10 @@
 /obj/machinery/New()
 	..()
 
-	var/static/processing_splitter = 1
+	if (prob(50))
+		use_new_processing = 0
 
-	use_new_processing = processing_splitter++ % 2
-
-	var/lastrefdigit = text2ascii("\ref[src]", 11) // Get the last digit of the byond reference, it will be used to divide less-than-full processing into roughly equal processing ticks
+	var/lastrefdigit = text2ascii("\ref[src]", 10) // Get the last digit of the byond reference, it will be used to divide less-than-full processing into roughly equal processing ticks
 	switch (lastrefdigit)
 		if (48 to 57) // 1 to 10
 			processing_bucket = lastrefdigit-47
