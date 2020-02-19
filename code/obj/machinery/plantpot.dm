@@ -144,8 +144,6 @@
 			update_icon()
 			update_name()
 
-		if (!src.use_new_processing && src.tickcount++ % 2)
-			return
 			// We skip every other tick. Another cpu-conserving measure.
 		if (!src.current || src.dead)
 			return

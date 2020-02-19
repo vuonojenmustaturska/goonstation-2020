@@ -14,7 +14,7 @@
 
 #define STOP_PROCESSING(target) do {\
 	if (target.current_processing_tier) {\
-		bucketmachines[target.current_processing_tier][(target.processing_bucket%(1<<(target.current_processing_tier-1)))+1] -= target;\
+		machines[target.current_processing_tier][(target.processing_bucket%(1<<(target.current_processing_tier-1)))+1] -= target;\
 		target.current_processing_tier = null;\
 	};\
 	} while (FALSE)
@@ -24,5 +24,5 @@
 		STOP_PROCESSING(target);\
 	};\
 	target.current_processing_tier = priority;\
-	bucketmachines[priority][(target.processing_bucket%(1<<(priority-1)))+1] += target;\
+	machines[priority][(target.processing_bucket%(1<<(priority-1)))+1] += target;\
 	} while (FALSE)

@@ -1,9 +1,10 @@
 // handles machines
 datum/controller/process/machines
-	var/tmp/list/machines
 	var/tmp/list/pipe_networks
 	var/tmp/list/powernets
 	var/tmp/list/atmos_machines
+	var/tmp/list/machines
+	var/tmp/ticker = 0
 
 	setup()
 		name = "Machine"
@@ -12,13 +13,13 @@ datum/controller/process/machines
 		Station_VNet = new /datum/v_space/v_space_network()
 
 	proc/d_print()
-		for(var/obj/machinery/machine in src.machines)
+		for(var/obj/machinery/machine in machines)
 			boutput(world,"[machine.name] : [machine.type]")
 
 	doWork()
 		var/c = 0
-/*		src.atmos_machines = global.atmos_machines
-		var/c = 0
+
+		src.atmos_machines = global.atmos_machines
 		for(var/obj/machinery/machine in atmos_machines)
 			if( machine.z == 4 && !Z4_ACTIVE ) continue
 #ifdef MACHINE_PROCESSING_DEBUG
@@ -55,20 +56,23 @@ datum/controller/process/machines
 #endif
 			if (!(c++ % 100))
 				scheck()
-*/
-		src.machines = global.machines
-		for(var/obj/machinery/machine in src.machines)
-			if( machine.z == 4 && !Z4_ACTIVE ) continue
-#ifdef MACHINE_PROCESSING_DEBUG
-			var/t = world.time
-#endif
-			machine.process()
-#ifdef MACHINE_PROCESSING_DEBUG
-			register_machine_time(machine, world.time - t)
-#endif
-			if (!(c++ % 100))
-				scheck()
 
+		src.machines = global.machines
+
+		for (var/i in 1 to 5)
+			var/list/machlist = src.machines[i]
+			for(var/obj/machinery/machine in machlist[(src.ticker % (1<<(i-1)))+1])
+				if( machine.z == 4 && !Z4_ACTIVE ) continue
+		#ifdef MACHINE_PROCESSING_DEBUG
+				var/t = world.time
+		#endif
+				machine.process()
+		#ifdef MACHINE_PROCESSING_DEBUG
+				register_machine_time(machine, world.time - t)
+		#endif
+				if (!(c++ % 100))
+					scheck()
+		src.ticker++
 
 #ifdef MACHINE_PROCESSING_DEBUG
 proc/register_machine_time(var/datum/machine, var/time)
