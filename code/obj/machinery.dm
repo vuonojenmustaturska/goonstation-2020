@@ -30,12 +30,8 @@
 /obj/machinery/New()
 	..()
 
-	var/lastrefdigit = text2ascii("\ref[src]", 10) // Get the last digit of the byond reference, it will be used to divide less-than-full processing into roughly equal processing ticks
-	switch (lastrefdigit)
-		if (48 to 57) // 1 to 10
-			src.processing_bucket = lastrefdigit-47
-		else // a-f, 97-102 => 11 to 16
-			src.processing_bucket = lastrefdigit-86
+	var/static/machines_counter = 0
+	src.processing_bucket = machines_counter++ % 16 // bitwise & 15 might be faster as a micro-optimization, the difference is likely trivial 
 
 	SubscribeToProcess()
 	if (current_state > GAME_STATE_WORLD_INIT)

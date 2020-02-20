@@ -59,7 +59,7 @@ datum/controller/process/machines
 
 		src.machines = global.machines
 
-		for (var/i in 1 to 5)
+		for (var/i in 1 to PROCESSING_MAX_IN_USE)
 			var/list/machlist = src.machines[i]
 			for(var/obj/machinery/machine in machlist[(src.ticker % (1<<(i-1)))+1])
 				if( machine.z == 4 && !Z4_ACTIVE ) continue
