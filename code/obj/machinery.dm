@@ -31,7 +31,7 @@
 	..()
 
 	var/static/machines_counter = 0
-	src.processing_bucket = machines_counter++ % 16 // bitwise & 15 might be faster as a micro-optimization, the difference is likely trivial 
+	src.processing_bucket = machines_counter++ & 15 // this is just modulo 16 but faster due to power-of-two memes
 
 	SubscribeToProcess()
 	if (current_state > GAME_STATE_WORLD_INIT)
