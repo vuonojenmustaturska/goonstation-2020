@@ -101,13 +101,11 @@ What are the archived variables for?
 	return heat_capacity_archived
 
 /datum/gas_mixture/proc/total_moles()
-	var/moles = oxygen + carbon_dioxide + nitrogen + toxins
+	. = oxygen + carbon_dioxide + nitrogen + toxins
 
 	if(trace_gases && trace_gases.len)
 		for(var/datum/gas/trace_gas in trace_gases)
-			moles += trace_gas.moles
-
-	return moles
+			. += trace_gas.moles
 
 /datum/gas_mixture/proc/return_pressure()
 	return (total_moles()*R_IDEAL_GAS_EQUATION*temperature/volume)
@@ -945,5 +943,3 @@ What are the archived variables for?
 	//Similar to check_me_then_share(...) but also checks to see if amount of air moved is small enough
 	//	that group processing is still accurate for the sharer (aborts if not)
 	//Returns: 0 if the self-check failed then -1 if sharer-check failed then 1 if successful share
-
-
