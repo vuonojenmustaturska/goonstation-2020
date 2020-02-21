@@ -509,19 +509,6 @@ proc/get_angle(atom/a, atom/b)
 	else
 		.= copytext(message, 1, length + 1)
 
-/proc/angle2dir(var/degree)
-	. = NORTH|WEST
-	if (degree < 0)
-		degree = 360 + (degree % 360)
-	degree = ((degree+22.5)%360)
-	if(degree < 45)			. = NORTH
-	else if(degree < 90)	. = NORTH|EAST
-	else if(degree < 135)	. = EAST
-	else if(degree < 180)	. = SOUTH|EAST
-	else if(degree < 225)	. = SOUTH
-	else if(degree < 270)	. = SOUTH|WEST
-	else if(degree < 315)	. = WEST
-
 /proc/angle2text(var/degree)
 	. = dir2text(angle2dir(degree))
 
