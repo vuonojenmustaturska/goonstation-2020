@@ -2,6 +2,7 @@ slurm - Inactive
 gibbed - Inactive
 stuntwaffle - Inactive
 wirewraith - Host
+naksuasdf - Host
 
 pantaloons - Inactive
 keelin - Coder
