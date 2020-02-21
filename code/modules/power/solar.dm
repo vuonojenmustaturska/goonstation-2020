@@ -146,7 +146,6 @@
 		//overlays += image('icons/obj/power.dmi', icon_state = "solar_panel", layer = FLY_LAYER)
 		src.icon_state = "solar_panel"
 		src.dir = angle2dir(adir)
-	return
 
 /obj/machinery/power/solar/proc/update_solar_exposure()
 	if(obscured)
@@ -167,19 +166,18 @@
 	if(status & BROKEN)
 		return
 
-	//return //TODO: FIX
-
 	if(!obscured)
 		var/sgen = SOLARGENRATE * sunfrac
 		add_avail(sgen)
-		if(powernet && control)
-			if(control in powernet.nodes) //this line right here...
-				control.gen += sgen
+		if(powernet && control && powernet == control.powernet)
+			control.gen += sgen
 
 	if(adir != ndir)
 		SPAWN_DBG(10+rand(0,15))
+			var/old_adir = adir
 			adir = (360+adir+CLAMP(ndir-adir,-10,10))%360
-			updateicon()
+			if (round((old_adir+22.5)%360) != round((old_adir+22.5)%360)) // it's basically angle2dir except it returns wrong values, but it changes when angle2dir changes and stays the same when angle2dir stays the same
+				updateicon()
 			update_solar_exposure()
 
 /obj/machinery/power/solar/proc/broken()
