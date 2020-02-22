@@ -32,7 +32,7 @@
 
 	var/static/machines_counter = 0
 	src.processing_bucket = machines_counter++ & 15 // this is just modulo 16 but faster due to power-of-two memes
-
+	machines += src
 	SubscribeToProcess()
 	if (current_state > GAME_STATE_WORLD_INIT)
 		spawn(5 DECI SECONDS)
@@ -43,6 +43,7 @@
 	src.power_change()
 
 /obj/machinery/disposing()
+	machines -= src
 	UnsubscribeProcess()
 	current_user = null
 	..()

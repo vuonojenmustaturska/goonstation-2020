@@ -57,7 +57,7 @@ datum/controller/process/machines
 			if (!(c++ % 100))
 				scheck()
 
-		src.machines = global.machines
+		src.machines = global.processing_machines
 
 		for (var/i in 1 to PROCESSING_MAX_IN_USE)
 			var/list/machlist = src.machines[i]

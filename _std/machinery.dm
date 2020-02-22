@@ -9,6 +9,7 @@
 
 #define PROCESSING_MAX_IN_USE PROCESSING_HALF
 
+var/global/list/processing_machines = generate_machinery_processing_buckets()
 
 /proc/generate_machinery_processing_buckets()
 	. = new /list(PROCESSING_MAX_IN_USE)
@@ -19,7 +20,7 @@
 
 #define STOP_PROCESSING(target) do {\
 	if (target.current_processing_tier) {\
-		machines[target.current_processing_tier][(target.processing_bucket%(1<<(target.current_processing_tier-1)))+1] -= target;\
+		processing_machines[target.current_processing_tier][(target.processing_bucket%(1<<(target.current_processing_tier-1)))+1] -= target;\
 		target.current_processing_tier = null;\
 	};\
 	} while (FALSE)
@@ -29,5 +30,5 @@
 		STOP_PROCESSING(target);\
 	};\
 	target.current_processing_tier = priority;\
-	machines[priority][(target.processing_bucket%(1<<(priority-1)))+1] += target;\
+	processing_machines[priority][(target.processing_bucket%(1<<(priority-1)))+1] += target;\
 	} while (FALSE)
