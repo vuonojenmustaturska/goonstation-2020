@@ -5,6 +5,7 @@
 	icon_state = "compressor"
 	anchored = 1
 	density = 1
+	machine_registry_idx = MACHINES_MISC
 	var/obj/machinery/power/turbine/turbine
 	var/datum/gas_mixture/gas_contained
 	var/turf/simulated/inturf
@@ -223,7 +224,7 @@
 /obj/machinery/computer/turbine_computer/New()
 	..()
 	SPAWN_DBG(5 DECI SECONDS)
-		for(var/obj/machinery/compressor/C in machines)
+		for(var/obj/machinery/compressor/C in machine_registry[MACHINES_MISC])
 			if(id == C.comp_id)
 				compressor = C
 		doors = new /list()

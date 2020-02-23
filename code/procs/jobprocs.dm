@@ -408,7 +408,7 @@
 
 		if (joined_late == 1 && map_settings && map_settings.arrivals_type != MAP_SPAWN_CRYO)//!ismap("DESTINY") && !ismap("CLARION"))
 			if (src.mind && src.mind.assigned_role) //ZeWaka: I'm adding this back here because hell if I know where it goes.
-				for (var/obj/machinery/computer/announcement/A in machines)
+				for (var/obj/machinery/computer/announcement/A in machine_registry[MACHINES_ANNOUNCEMENTS])
 					if (!A.status && A.announces_arrivals)
 						if (src.mind.assigned_role == "MODE") //ZeWaka: Fix for alien invasion dudes. Possibly not needed now.
 							return

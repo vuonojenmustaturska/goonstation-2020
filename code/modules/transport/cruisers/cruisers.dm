@@ -523,7 +523,7 @@
 		var/list/beacons = list()
 		for(var/obj/warp_beacon/W in warp_beacons)
 			beacons += W
-		for (var/obj/machinery/tripod/T)
+		for (var/obj/machinery/tripod/T in machine_registry[MACHINES_MISC])
 			if (istype(T.bulb, /obj/item/tripod_bulb/beacon))
 				beacons += T
 		warping = 1

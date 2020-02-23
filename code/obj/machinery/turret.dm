@@ -8,6 +8,7 @@
 	layer = OBJ_LAYER
 	invisibility = 2
 	density = 0
+	machine_registry_idx = MACHINES_TURRETS
 	var/lasers = 0
 	var/health = 100
 	var/obj/machinery/turretcover/cover = null

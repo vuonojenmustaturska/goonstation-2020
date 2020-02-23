@@ -392,7 +392,7 @@ Doing this because FindTurfs() isn't even used
 /mob/verb/apcs()
 	set category = "Debug"
 	if(Debug)
-		for(var/obj/machinery/power/apc/APC in machines)
+		for(var/obj/machinery/power/apc/APC in machine_registry[MACHINES_POWER])
 			boutput(world, APC.report())
 	else
 		alert("Debugging off")
@@ -422,10 +422,12 @@ Doing this because FindTurfs() isn't even used
 	set category = "Debug"
 	if(Debug)
 		var/n = 0
-		for(var/obj/machinery/M in machines)
-			n++
-			if(! (M in machines) && ! (M in atmos_machines))
-				boutput(world, "[M] [M.type]: not in list")
+			for(var/i in 1 to PROCESSING_MAX_IN_USE)
+				for(var/list/machines_list in processing_machines[i])
+					for(var/obj/machinery/M in machines_list)
+						n++
+						if(! (M in machines) && ! (M in atmos_machines))
+							boutput(world, "[M] [M.type]: not in list")
 
 		boutput(world, "in world: [n]; in list:[machines.len + atmos_machines.len]")
 	else

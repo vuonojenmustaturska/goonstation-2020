@@ -11,6 +11,7 @@
 	anchored = 1
 	power_usage = 100
 	layer = 2.5
+	machine_registry_idx = MACHINES_CONVEYORS
 	var/operating = 0	// 1 if running forward, -1 if backwards, 0 if off
 	var/operable = 1	// true if can operate (no broken segments in this belt run)
 	var/basedir			// this is the default (forward) direction, set by the map dir
@@ -50,8 +51,6 @@
 
 	if (owner) //conveyor switch could've been exploded
 		owner.conveyors -= src
-
-	machines -= src
 	..()
 
 	// set the dir and target turf depending on the operating direction
@@ -428,7 +427,7 @@
 
 	SPAWN_DBG(5 DECI SECONDS)		// allow map load
 		conveyors = list()
-		for(var/obj/machinery/conveyor/C in machines)
+		for(var/obj/machinery/conveyor/C in machine_registry[MACHINES_CONVEYORS])
 			if(C.id == id)
 				conveyors += C
 				C.owner = src
@@ -489,7 +488,7 @@
 	update()
 
 	// find any switches with same id as this one, and set their positions to match us
-	for(var/obj/machinery/conveyor_switch/S in machines)
+	for(var/obj/machinery/conveyor_switch/S in conveyor_switches)
 		if(S.id == src.id)
 			S.position = position
 			S.update()

@@ -163,7 +163,7 @@
 		dat += "<tt><b>Automatic Station Cleaner v1.1</b></tt>"
 		dat += "<br><br>"
 		dat += "Status: <A href='?src=\ref[src];start=1'>[src.on ? "On" : "Off"]</A><br>"
-		
+
 		if (user.client.tooltipHolder)
 			user.client.tooltipHolder.showClickTip(src, list(
 				"params" = params,
@@ -251,7 +251,7 @@
 		// So nearby bots don't go after the same mess.
 		var/list/cleanbottargets = list()
 		if (!src.target || src.target == null)
-			for (var/obj/machinery/bot/cleanbot/bot in machines)
+			for (var/obj/machinery/bot/cleanbot/bot in machine_registry[MACHINES_BOTS])
 				if (bot != src)
 					if (bot.target && !(bot.target in cleanbottargets))
 						cleanbottargets += bot.target

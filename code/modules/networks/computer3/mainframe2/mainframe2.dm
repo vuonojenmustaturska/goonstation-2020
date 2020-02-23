@@ -39,6 +39,7 @@
 	device_tag = "PNET_MAINFRAME"
 	timeout = 30
 	req_access = list(access_heads)
+	machine_registry_idx = MACHINES_MAINFRAMES
 	var/list/terminals = list() //list of netIDs/terminal profiles of connected terminal devices.
 	var/list/processing = list() //As the name implies, this is the list of programs that should be updated every process call on the mainframe object.
 	var/list/timeout_list = list() //Terminals currently set to time out
@@ -948,7 +949,7 @@
 	if (!the_message)
 		return 1
 
-	for (var/obj/machinery/networked/mainframe/aMainframe in machines)//world)
+	for (var/obj/machinery/networked/mainframe/aMainframe in machine_registry[MACHINES_MAINFRAMES])
 		LAGCHECK(LAG_LOW)
 		if (aMainframe.z != 1)
 			continue

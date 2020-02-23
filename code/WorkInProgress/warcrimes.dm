@@ -572,7 +572,7 @@ var/bombini_saved = 0
 /obj/machinery/computer/shuttle_bus
 	name = "John's Bus"
 	icon_state = "shuttle"
-
+	machine_registry_idx = MACHINES_SHUTTLECOMPS
 
 /obj/machinery/computer/shuttle_bus/embedded
 	icon_state = "shuttle-embed"
@@ -651,11 +651,11 @@ var/bombini_saved = 0
 			if(!johnbus_active)
 				var/turf/T = get_turf(src)
 				johnbus_active = 1
-				for(var/obj/machinery/computer/shuttle_bus/C in machines)
+				for(var/obj/machinery/computer/shuttle_bus/C in machine_registry[MACHINES_SHUTTLECOMPS])
 
 					C.visible_message("<span style=\"color:red\">John is starting up the engines, this could take a minute!</span>")
 
-				for(var/obj/machinery/computer/shuttle_bus/embedded/B in machines)
+				for(var/obj/machinery/computer/shuttle_bus/embedded/B in machine_registry[MACHINES_SHUTTLECOMPS])
 					T = get_turf(B)
 					SPAWN_DBG(1 DECI SECOND)
 						playsound(T, "sound/effects/ship_charge.ogg", 60, 1)
@@ -750,7 +750,7 @@ var/bombini_saved = 0
 
 	johnbus_active = 0
 
-	for(var/obj/machinery/computer/shuttle_bus/C in machines)
+	for(var/obj/machinery/computer/shuttle_bus/C in machine_registry[MACHINES_TURRETS])
 
 		C.visible_message("<span style=\"color:red\">John's Juicin' Bus has Moved!</span>")
 

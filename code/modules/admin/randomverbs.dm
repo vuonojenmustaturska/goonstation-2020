@@ -446,7 +446,7 @@
 		return
 	var/input2 = input(usr, "Add a headline for this alert?", "What?", "") as null|text
 /*
-	for (var/obj/machinery/computer/communications/C in machines)
+	for (var/obj/machinery/computer/communications/C in machine_registry[MACHINES_COMMSCONSOLES])
 		if(! (C.status & (BROKEN|NOPOWER) ) )
 			var/obj/item/paper/P = new /obj/item/paper( C.loc )
 			P.name = "paper- '[command_name()] Update.'"
@@ -616,16 +616,16 @@
 	if(!selection)
 		return
 
-	var/rotation = input("Select rotation:", "FUCK YE", "0°") in list("0°", "90°", "180°", "270°")
+	var/rotation = input("Select rotation:", "FUCK YE", "0ï¿½") in list("0ï¿½", "90ï¿½", "180ï¿½", "270ï¿½")
 
 	switch(rotation)
-		if("0°")
+		if("0ï¿½")
 			selection.dir = NORTH
-		if("90°")
+		if("90ï¿½")
 			selection.dir = EAST
-		if("180°")
+		if("180ï¿½")
 			selection.dir = SOUTH
-		if("270°")
+		if("270ï¿½")
 			selection.dir = WEST
 
 	logTheThing("admin", selection, "set %target%'s viewport orientation to [rotation].")
@@ -2010,7 +2010,7 @@ var/global/night_mode_enabled = 0
 	logTheThing("admin", src, null, "toggled Night Mode [night_mode_enabled ? "on" : "off"]")
 	logTheThing("diary", src, null, "toggled Night Mode [night_mode_enabled ? "on" : "off"]", "admin")
 
-	for(var/obj/machinery/power/apc/APC in machines)
+	for(var/obj/machinery/power/apc/APC in machine_registry[MACHINES_POWER])
 		if(APC.area && APC.area.workplace)
 			APC.do_not_operate = night_mode_enabled
 			APC.update()

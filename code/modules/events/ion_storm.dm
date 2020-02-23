@@ -87,7 +87,7 @@
 		// Fuck up a couple of APCs
 		if (!station_apcs.len)
 			var/turf/T = null
-			for (var/obj/machinery/power/apc/APC in machines)
+			for (var/obj/machinery/power/apc/APC in machine_registry[MACHINES_POWER])
 				if (APC.z != 1)
 					continue
 				T = get_turf(APC)

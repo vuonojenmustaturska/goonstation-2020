@@ -120,7 +120,7 @@ var/global/list/all_GPSs = list()
 		HTML += "<hr>"
 
 		HTML += "<div class='gps group'><b>Beacons</b></div>"
-		for (var/obj/machinery/beacon/B in machines)
+		for (var/obj/machinery/beacon/B in machine_registry[MACHINES_BEACONS])
 			if (B.enabled == 1)
 				var/turf/T = get_turf(B.loc)
 				HTML += "<div class='gps'><span><b>[B.sname]</b><br><span>located at: [T.x], [T.y]</span><span style='float: right'>[src.get_z_info(T)]</span></span></div>"
@@ -282,6 +282,7 @@ var/global/list/all_GPSs = list()
 	desc = "A coordinate beacon used for space GPSes."
 	icon = 'icons/obj/ship.dmi'
 	icon_state = "beacon"
+	machine_registry_idx = MACHINES_BEACONS
 	var/sname = "unidentified"
 	var/enabled = 1
 

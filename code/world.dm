@@ -1090,14 +1090,14 @@ var/f_color_selector_handler/F_Color_Selector
 				logTheThing("ooc", null, null, "IRC OOC: [nick]: [msg]")
 
 				if (nick == "buttbot")
-					for (var/obj/machinery/bot/buttbot/B in machines)
+					for (var/obj/machinery/bot/buttbot/B in machine_registry[MACHINES_BOTS])
 						if(B.on)
 							B.speak(msg)
 					return 1
 
 				//This is important.
 				else if (nick == "HeadSurgeon")
-					for (var/obj/machinery/bot/medbot/head_surgeon/HS in machines)
+					for (var/obj/machinery/bot/medbot/head_surgeon/HS in machine_registry[MACHINES_BOTS])
 						if (HS.on)
 							HS.speak(msg)
 					for (var/obj/item/clothing/suit/cardboard_box/head_surgeon/HS in world)
@@ -1387,7 +1387,7 @@ var/f_color_selector_handler/F_Color_Selector
 				var/msgText = file2text(msgFile)
 
 				//Prints to every networked printer in the world
-				for (var/obj/machinery/networked/printer/P in machines)
+				for (var/obj/machinery/networked/printer/P in machine_registry[MACHINES_PRINTERS])
 					P.print_buffer += "[msgTitle]&title;[msgText]"
 					P.print()
 

@@ -58,7 +58,7 @@
 	var/list/beacons = list()
 	for(var/obj/warp_beacon/W in warp_beacons)
 		beacons += W
-	for (var/obj/machinery/tripod/T in machines)
+	for (var/obj/machinery/tripod/T in machine_registry[MACHINES_MISC])
 		if (istype(T.bulb, /obj/item/tripod_bulb/beacon))
 			beacons += T
 	wormholeQueued = 1
@@ -93,6 +93,3 @@
 	warprecharge =300
 	speedmod = 3
 	icon_state = "engine-3"
-
-
-

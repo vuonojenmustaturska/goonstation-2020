@@ -32,9 +32,10 @@
 		for(var/mob/M in mobs)
 			mobs++
 
+
 		var/output = {"<B>GENERAL SYSTEMS REPORT</B><HR>
 <B>General Processing Data</B><BR>
-<B># of Machines:</B> [machines.len + atmos_machines.len]<BR>
+<B># of Machines:</B> [length(all_processing_machines()) + atmos_machines.len]<BR>
 <B># of Pipe Networks:</B> [pipe_networks.len]<BR>
 <B># of Processing Items:</B> [processing_items.len]<BR>
 <B># of Power Nets:</B> [powernets.len]<BR>
@@ -296,7 +297,7 @@
 /client/proc/GenerateOverlay()
 	var/width = view
 	var/height = view
-		
+
 	if(istext( view ))
 		var/split = splittext(view, "x")
 		width = text2num(split[1])/2

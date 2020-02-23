@@ -129,6 +129,7 @@
 	icon_state = "simchair"
 	anchored = 1
 	density = 0
+	machine_registry_idx = MACHINES_SIM
 	var/active = 0
 	var/id = 0
 	var/internal_id = 0
@@ -185,6 +186,7 @@
 	anchored = 1
 	density = 1
 	deconstruct_flags = DECON_MULTITOOL
+	machine_registry_idx = MACHINES_SIM
 	var/active = 0
 	var/internal_id = 0
 	var/network = "none"
@@ -363,7 +365,7 @@
 /obj/machinery/sim/vr_bed/proc/done()
 	if(status & (NOPOWER|BROKEN))
 		return
-	for(var/obj/machinery/sim/vr_bed/C in machines)
+	for(var/obj/machinery/sim/vr_bed/C in machine_registry[MACHINES_SIM])
 		if(!C.active)
 			continue
 		if(C.con_user)

@@ -45,11 +45,11 @@
 		dy = c / abs(s)
 
 
-	for(var/obj/machinery/power/tracker/T in machines)
+	for(var/obj/machinery/power/tracker/T in machine_registry[MACHINES_POWER])
 		T.set_angle(angle)
 		LAGCHECK(LAG_LOW)
 
-	for(var/obj/machinery/power/solar/S in machines)
+	for(var/obj/machinery/power/solar/S in machine_registry[MACHINES_POWER])
 		occlusion(S)
 		LAGCHECK(LAG_LOW)
 
@@ -101,4 +101,3 @@
 			return 225
 		else
 			return null
-

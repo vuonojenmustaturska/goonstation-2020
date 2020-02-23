@@ -3,6 +3,7 @@
 /obj/machinery/computer/announcement
 	name = "Announcement Computer"
 	icon_state = "comm"
+	machine_registry_idx = MACHINES_ANNOUNCEMENTS
 	var/last_announcement = 0
 	var/announcement_delay = 1200
 	var/obj/item/card/id/ID = null

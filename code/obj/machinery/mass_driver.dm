@@ -3,6 +3,7 @@
 	icon = 'icons/obj/stationobjs.dmi'
 	desc = "A device that launches objects on it at great velocity when activated."
 	icon_state = "mass_driver"
+	machine_registry_idx = MACHINES_MASSDRIVERS
 	var/power = 1.0
 	var/code = 1.0
 	var/id = 1.0
@@ -28,4 +29,3 @@
 				O.throw_at(target, drive_range * src.power, src.power)
 	flick("mass_driver1", src)
 	return
-

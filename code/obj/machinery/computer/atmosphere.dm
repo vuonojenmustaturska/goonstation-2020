@@ -15,7 +15,7 @@ Atmos alert computer
 	name = "Alert Computer"
 	icon_state = "atmos"
 	var/alarms = list("Fire"=list(), "Atmosphere"=list())
-
+	machine_registry_idx = MACHINES_ATMOSALERTS
 
 /obj/machinery/computer/atmosphere/siphonswitch
 	name = "Area Air Control"

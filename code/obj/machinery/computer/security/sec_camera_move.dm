@@ -36,8 +36,8 @@
 
 	var/list/old_types = splittext("[A.type]", "/")
 
-	for(var/obj/machinery/camera/current in machines)
-		if(current.qdeled || current.disposed || old.z != current.z)
+	for(var/obj/machinery/camera/current in cameras)
+		if(old.z != current.z)
 			continue
 		//make sure it's the right direction
 		if(dx && (current.x * dx <= old.x * dx))

@@ -8,6 +8,7 @@
 	icon_state = "dna"
 	req_access = list(access_heads) //Only used for record deletion right now.
 	object_flags = CAN_REPROGRAM_ACCESS
+	machine_registry_idx = MACHINES_CLONINGCONSOLES
 	var/obj/machinery/clone_scanner/scanner = null //Linked scanner. For scanning.
 	var/obj/machinery/clonepod/pod1 = null //Linked cloning pod.
 	var/temp = "Initializing System..."

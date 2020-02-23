@@ -8,6 +8,7 @@
 	anchored = 1
 	mats = 10
 	power_usage = 50
+	machine_registry_idx = MACHINES_DRONERECHARGERS
 	var/chargerate = 400
 	var/mob/living/silicon/ghostdrone/occupant = null
 	var/transition = 0 //For when closing

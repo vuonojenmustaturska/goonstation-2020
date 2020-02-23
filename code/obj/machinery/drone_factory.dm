@@ -128,7 +128,7 @@ var/global/list/ghostdrone_candidates = list()
 			for (var/obj/machinery/conveyor/C in src.conveyors)
 				if (C.id != src.id)
 					src.conveyors -= C
-		for (var/obj/machinery/conveyor/C in machines)
+		for (var/obj/machinery/conveyor/C in machine_registry[MACHINES_CONVEYORS])
 			if (C.id == src.id)
 				if (C in src.conveyors)
 					continue
@@ -139,7 +139,7 @@ var/global/list/ghostdrone_candidates = list()
 			for (var/obj/machinery/drone_recharger/factory/C in src.factory_rechargers)
 				if (C.id != src.id)
 					src.conveyors -= C
-		for (var/obj/machinery/drone_recharger/factory/C in machines)
+		for (var/obj/machinery/drone_recharger/factory/C in machine_registry[MACHINES_DRONERECHARGERS])
 			if (C.id == src.id)
 				if (C in src.factory_rechargers)
 					continue
@@ -322,7 +322,7 @@ var/global/list/ghostdrone_candidates = list()
 			for (var/obj/machinery/conveyor/C in src.conveyors)
 				if (C.id != src.id_belt)
 					src.conveyors -= C
-		for (var/obj/machinery/conveyor/C in machines)
+		for (var/obj/machinery/conveyor/C in machine_registry[MACHINES_CONVEYORS])
 			if (C.id == src.id_belt)
 				if (C in src.conveyors)
 					continue
@@ -333,7 +333,7 @@ var/global/list/ghostdrone_candidates = list()
 			for (var/obj/machinery/drone_recharger/factory/C in src.factory_rechargers)
 				if (C.id != src.id_recharger)
 					src.conveyors -= C
-		for (var/obj/machinery/drone_recharger/factory/C in machines)
+		for (var/obj/machinery/drone_recharger/factory/C in machine_registry[MACHINES_DRONERECHARGERS])
 			if (C.id == src.id_recharger)
 				if (C in src.factory_rechargers)
 					continue

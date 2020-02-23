@@ -34,10 +34,10 @@ ENGINE
 
 
 	proc/setupLinks()
-		for(var/obj/machinery/fission/reactor/R in machines)
+		for(var/obj/machinery/fission/reactor/R in machine_registry[MACHINES_FISSION])
 			if(src.id == R.id)
 				src.reactors.Add(R)
-		for(var/obj/machinery/computer/fission/F in machines)
+		for(var/obj/machinery/computer/fission/F in machine_registry[MACHINES_FISSION])
 			if(src.id == F.id)
 				F.theEngine = src
 
@@ -123,6 +123,7 @@ REACTOR
 	icon = 'icons/obj/machines/nuclear64x32.dmi'
 	icon_state = "reactoroff"
 
+	machine_registry_idx = MACHINES_FISSION
 	// We can have at any time a maximum of 5 fuel rods and 5 control rods
 	var/list/obj/item/rod/fuel/fuelRods = list()
 	var/list/obj/item/rod/control/controlRods = list()

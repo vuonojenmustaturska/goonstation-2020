@@ -8,7 +8,7 @@
 	if(status & (NOPOWER|BROKEN))
 		return
 	use_power(5)
-	for(var/obj/machinery/noise_maker/M in machines)
+	for(var/obj/machinery/noise_maker/M in machine_registry[MACHINES_MISC])
 		if (M.ID == src.ID)
 			if(rep == 1)
 				M.containment_fail = 1
@@ -27,7 +27,7 @@
 //	if(rep == 0)
 //		for (var/obj/X in orange(4,src))
 //			if(istype(X,/obj/machinery/the_singularity/))
-//				for(var/obj/machinery/noise_maker/M in machines)
+//				for(var/obj/machinery/noise_maker/M in machine_registry[MACHINES_MISC])
 //					rep = 1
 //					M.containment_fail = 1
 //					M.sound = 3

@@ -34,6 +34,7 @@
 /obj/machinery/computer/prison_shuttle
 	name = "Prison Shuttle"
 	icon_state = "shuttle"
+	machine_registry_idx = MACHINES_SHUTTLECOMPS
 	var/active = 0
 
 /obj/machinery/computer/prison_shuttle/embedded
@@ -60,6 +61,7 @@
 /obj/machinery/computer/mining_shuttle
 	name = "Shuttle Control"
 	icon_state = "shuttle"
+	machine_registry_idx = MACHINES_SHUTTLECOMPS
 	var/active = 0
 
 /obj/machinery/computer/mining_shuttle/embedded
@@ -86,6 +88,7 @@
 /obj/machinery/computer/research_shuttle
 	name = "Shuttle Control"
 	icon_state = "shuttle"
+	machine_registry_idx = MACHINES_SHUTTLECOMPS
 	var/active = 0
 	var/net_id = null
 	var/obj/machinery/power/data_terminal/link = null
@@ -114,12 +117,14 @@
 /obj/machinery/computer/icebase_elevator
 	name = "Elevator Control"
 	icon_state = "shuttle"
+	machine_registry_idx = MACHINES_ELEVATORCOMPS
 	var/active = 0
 	var/location = 1 // 0 for bottom, 1 for top
 
 /obj/machinery/computer/biodome_elevator
 	name = "Elevator Control"
 	icon_state = "shuttle"
+	machine_registry_idx = MACHINES_ELEVATORCOMPS
 	var/active = 0
 	var/location = 1 // 0 for bottom, 1 for top
 
@@ -239,7 +244,7 @@
 
 /obj/machinery/computer/mining_shuttle/proc/send()
 	if(!active)
-		for(var/obj/machinery/computer/mining_shuttle/C in machines)
+		for(var/obj/machinery/computer/mining_shuttle/C in machine_registry[MACHINES_SHUTTLECOMPS])
 			active = 1
 			C.visible_message("<span style=\"color:red\">The Mining Shuttle has been Called and will leave shortly!</span>")
 		SPAWN_DBG(10 SECONDS)
@@ -258,7 +263,7 @@
 			start_location.move_contents_to(end_location)
 			miningshuttle_location = 0
 
-	for(var/obj/machinery/computer/mining_shuttle/C in machines)
+	for(var/obj/machinery/computer/mining_shuttle/C in machine_registry[MACHINES_SHUTTLECOMPS])
 		active = 0
 		C.visible_message("<span style=\"color:red\">The Mining Shuttle has Moved!</span>")
 
@@ -297,7 +302,7 @@
 
 		if (href_list["send"])
 			if(!active)
-				for(var/obj/machinery/computer/prison_shuttle/C in machines)
+				for(var/obj/machinery/computer/prison_shuttle/C in machine_registry[MACHINES_SHUTTLECOMPS])
 					active = 1
 					C.visible_message("<span style=\"color:red\">The Prison Shuttle has been Called and will leave shortly!</span>")
 
@@ -344,7 +349,7 @@
 			brigshuttle_location = 0
 		*/
 
-	for(var/obj/machinery/computer/prison_shuttle/C in machines)
+	for(var/obj/machinery/computer/prison_shuttle/C in machine_registry[MACHINES_SHUTTLECOMPS])
 		active = 0
 		C.visible_message("<span style=\"color:red\">The Prison Shuttle has Moved!</span>")
 
@@ -384,10 +389,10 @@
 /obj/machinery/computer/research_shuttle/Topic(href, href_list)
 	if(..())
 		return
-	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (issilicon(usr)))
+	if ((usr.contents.Find(src) || (isturf(src.loc) && in_range(src, usr))) || (issilicon(usr)))
 		usr.machine = src
 		if (href_list["send"])
-			for(var/obj/machinery/shuttle/engine/propulsion/eng in machines) // ehh
+			for(var/obj/machinery/shuttle/engine/propulsion/eng in machine_registry[MACHINES_SHUTTLEPROPULSION]) // ehh
 				if(eng.stat1 == 0 && eng.stat2 == 0 && eng.id == "zeta")
 					boutput(usr, "<span style=\"color:red\">Propulsion thruster damaged. Unable to move shuttle.</span>")
 					return
@@ -399,7 +404,7 @@
 				return
 
 			if(!active)
-				for(var/obj/machinery/computer/research_shuttle/C in machines)
+				for(var/obj/machinery/computer/research_shuttle/C in machine_registry[MACHINES_SHUTTLECOMPS])
 					active = 1
 					C.visible_message("<span style=\"color:red\">The Research Shuttle has been Called and will leave shortly!</span>")
 
@@ -431,7 +436,7 @@
 			start_location.move_contents_to(end_location)
 			researchshuttle_location = 0
 
-	for(var/obj/machinery/computer/research_shuttle/C in machines)
+	for(var/obj/machinery/computer/research_shuttle/C in machine_registry[MACHINES_SHUTTLECOMPS])
 		active = 0
 		C.visible_message("<span style=\"color:red\">The Research Shuttle has Moved!</span>")
 
@@ -466,7 +471,7 @@
 
 		if (href_list["send"])
 			if(!active)
-				for(var/obj/machinery/computer/icebase_elevator/C in machines)
+				for(var/obj/machinery/computer/icebase_elevator/C in machine_registry[MACHINES_ELEVATORCOMPS])
 					active = 1
 					C.visible_message("<span style=\"color:red\">The elevator begins to move!</span>")
 				SPAWN_DBG(5 SECONDS)
@@ -496,7 +501,7 @@
 		start_location.move_contents_to(end_location, /turf/simulated/floor/arctic_elevator_shaft)
 		location = 0
 
-	for(var/obj/machinery/computer/icebase_elevator/C in machines)
+	for(var/obj/machinery/computer/icebase_elevator/C in machine_registry[MACHINES_ELEVATORCOMPS])
 		active = 0
 		C.visible_message("<span style=\"color:red\">The elevator has moved.</span>")
 		C.location = src.location
@@ -530,7 +535,7 @@
 
 		if (href_list["send"])
 			if(!active)
-				for(var/obj/machinery/computer/icebase_elevator/C in machines)
+				for(var/obj/machinery/computer/icebase_elevator/C in machine_registry[MACHINES_ELEVATORCOMPS])
 					active = 1
 					C.visible_message("<span style=\"color:red\">The elevator begins to move!</span>")
 				SPAWN_DBG(5 SECONDS)
@@ -560,7 +565,7 @@
 		start_location.move_contents_to(end_location, /turf/unsimulated/floor/setpieces/ancient_pit/shaft)
 		location = 0
 
-	for(var/obj/machinery/computer/biodome_elevator/C in machines)
+	for(var/obj/machinery/computer/biodome_elevator/C in machine_registry[MACHINES_ELEVATORCOMPS])
 		active = 0
 		C.visible_message("<span style=\"color:red\">The elevator has moved.</span>")
 		C.location = src.location

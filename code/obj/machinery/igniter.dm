@@ -2,6 +2,7 @@
 	name = "igniter"
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "igniter1"
+	machine_registry_idx = MACHINES_SPARKERS
 	var/id = null
 	var/on = 1.0
 	anchored = 1.0
@@ -45,6 +46,7 @@
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "migniter"
 	dir = EAST // so the sprites default to facing the same way as they always have
+	machine_registry_idx = MACHINES_SPARKERS
 	var/id = null
 	var/disable = 0
 	var/last_spark = 0
@@ -129,13 +131,13 @@
 	active = 1
 	icon_state = "launcheract"
 
-	for(var/obj/machinery/sparker/M in machines)
+	for(var/obj/machinery/sparker/M in machine_registry[MACHINES_SPARKERS])
 		if (M.id == src.id)
 			SPAWN_DBG( 0 )
 				M.ignite()
 		LAGCHECK(LAG_MED)
 
-	for(var/obj/machinery/igniter/M in machines)
+	for(var/obj/machinery/igniter/M in machine_registry[MACHINES_SPARKERS])
 		if(M.id == src.id)
 			use_power(50)
 			M.on = !( M.on )

@@ -69,6 +69,7 @@
 	mats = 2
 	flags = NOSPLASH
 	processing_tier = PROCESSING_HALF
+	machine_registry_idx = MACHINES_PLANTPOTS
 	var/datum/plant/current = null // What is currently growing in the plant pot
 	var/datum/plantgenes/plantgenes = null // Set this up in New
 	var/tickcount = 0  // Automatic. Tracks how many ticks have elapsed, for CPU efficiency things.

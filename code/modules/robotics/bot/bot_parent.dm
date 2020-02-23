@@ -5,6 +5,7 @@
 	layer = MOB_LAYER
 	event_handler_flags = USE_FLUID_ENTER | USE_CANPASS
 	object_flags = CAN_REPROGRAM_ACCESS
+	machine_registry_idx = MACHINES_BOTS
 	var/obj/item/card/id/botcard // ID card that the bot "holds".
 	var/access_lookup = "Captain" // For the get_access() proc. Defaults to all-access.
 	var/locked = null

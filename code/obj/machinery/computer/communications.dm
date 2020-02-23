@@ -5,6 +5,7 @@
 	icon_state = "comm"
 	req_access = list(access_heads)
 	object_flags = CAN_REPROGRAM_ACCESS
+	machine_registry_idx = MACHINES_COMMSCONSOLES
 	var/prints_intercept = 1
 	var/authenticated = 0
 	var/list/messagetitle = list()
@@ -169,7 +170,7 @@
 /proc/disablelockdown(var/mob/usr)
 	boutput(world, "<span style=\"color:red\">Lockdown cancelled by [usr.name]!</span>")
 
-	for(var/obj/machinery/firealarm/FA in machines) //deactivate firealarms
+	for(var/obj/machinery/firealarm/FA in machine_registry[MACHINES_FIREALARMS]) //deactivate firealarms
 		SPAWN_DBG( 0 )
 			if(FA.lockdownbyai == 1)
 				FA.lockdownbyai = 0
@@ -363,7 +364,7 @@
 
 	// hack to display shuttle timer
 	if(emergency_shuttle.online)
-		var/obj/machinery/computer/communications/C = locate() in machines//world
+		var/obj/machinery/computer/communications/C = locate() in machine_registry[MACHINES_COMMSCONSOLES]//world
 		if(C)
 			C.post_status("shuttle")
 

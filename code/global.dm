@@ -53,7 +53,6 @@ var/global
 	list/clients = list()
 	list/mobs = list()
 	list/AIs = list() //sorry, quicker loop through when we searching for AIs
-	list/machines = list()
 	list/doors = list()
 	list/allcables = list()
 	list/atmos_machines = list() // need another list to pull atmos machines out of the main machine loop and in with the pipe networks

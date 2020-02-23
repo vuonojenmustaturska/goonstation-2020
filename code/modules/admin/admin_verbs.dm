@@ -606,7 +606,7 @@ var/list/special_pa_observing_verbs = list(
 		src.holder.state = 1
 	//	src.mob.mind.observing = 0
 		update_admins(rank)
-	
+
 	blink(get_turf(src.mob))
 	if(istype(src.mob, /mob/dead/observer))
 		src.mob:reenter_corpse()
@@ -1067,10 +1067,10 @@ var/list/fun_images = list()
 	var/confirm3 = alert("Max out all power devices? (Prevents lights from going out mid-mapping)", "Max Power?", "No", "Yes")
 	if (confirm3 == "Yes")
 		//Max out all power (to avoid lights dying mid mapping)
-		for(var/obj/machinery/power/apc/C in machines)
+		for(var/obj/machinery/power/apc/C in machine_registry[MACHINES_POWER])
 			if(C.cell && C.z == 1)
 				C.cell.charge = C.cell.maxcharge
-		for(var/obj/machinery/power/smes/S in machines)
+		for(var/obj/machinery/power/smes/S in machine_registry[MACHINES_POWER])
 			if(S.z != 1)
 				continue
 			S.charge = S.capacity

@@ -498,14 +498,14 @@ proc/create_fluff(var/datum/mind/target)
 		explanation_text = "Destroy all [target_name] on the station."
 
 	check_completion()
-		for(var/obj/machinery/M in machines)
-			if (M.z != 1 || get_area_name(M) == "Space" || get_area_name(M) == "Ocean")
-				continue
-			if (!istype(M,target_equipment))
-				continue
-			if (M.status & BROKEN)
-				continue
-			return 0
+		for(var/i in 1 to PROCESSING_MAX_IN_USE)
+			for(var/list/machines_list in processing_machines[i])
+				for(var/obj/machinery/M in machines_list)
+					if (M.z != 1 || !istype(M,target_equipment) || get_area_name(M) == "Space" || get_area_name(M) == "Ocean")
+						continue
+					if (M.status & BROKEN)
+						continue
+					return 0
 
 		return 1
 

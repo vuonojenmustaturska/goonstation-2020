@@ -195,7 +195,7 @@ text("<A href='?src=\ref[src];operation=make'>[src.maketiles ? "Yes" : "No"]</A>
 	var/list/floorbottargets = list()
 	//checks if already targeting something
 	if(!src.target || src.target == null)
-		for(var/obj/machinery/bot/floorbot/bot in machines)
+		for(var/obj/machinery/bot/floorbot/bot in machine_registry[MACHINES_BOTS])
 			if(bot != src)
 				floorbottargets += bot.target
 	///Code for handling when out of tiles

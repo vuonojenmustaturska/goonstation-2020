@@ -16,10 +16,10 @@
 /obj/machinery/computer/am_engine/New()
 	..()
 	SPAWN_DBG( 24 )
-		for(var/obj/machinery/power/am_engine/engine/E in machines)
+		for(var/obj/machinery/power/am_engine/engine/E in machine_registry[MACHINES_POWER])
 			if(E.engine_id == src.engine_id)
 				src.connected_E = E
-		for(var/obj/machinery/power/am_engine/injector/I in machines)
+		for(var/obj/machinery/power/am_engine/injector/I in machine_registry[MACHINES_POWER])
 			if(I.engine_id == src.engine_id)
 				src.connected_I = I
 	return
@@ -87,4 +87,3 @@
 	dat += "<BR>\[ [(src.state != STATE_DEFAULT) ? "<A HREF='?src=\ref[src];operation=main'>Main Menu</A> | " : ""]<A HREF='?action=mach_close&window=communications'>Close</A> \]"
 	user << browse(dat, "window=communications;size=400x500")
 	onclose(user, "communications")
-

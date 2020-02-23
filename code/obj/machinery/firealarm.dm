@@ -7,7 +7,7 @@
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "fire0"
 	deconstruct_flags = DECON_WIRECUTTERS | DECON_MULTITOOL
-
+	machine_registry_idx = MACHINES_FIREALARMS
 	var/alarm_frequency = "1437"
 	var/detecting = 1.0
 	var/working = 1.0

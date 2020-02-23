@@ -29,7 +29,7 @@
 	for (var/datum/mind/waldo in chosen_waldos)
 		waldos += waldo
 		waldo.assigned_role = "MODE" //So they aren't chosen for other jobs.
-		possible_waldos.Remove(waldo)	
+		possible_waldos.Remove(waldo)
 
 	return 1
 
@@ -290,7 +290,7 @@
 	for(var/A in possible_modes)
 		intercepttext += i_text.build(A, pick(waldos))
 /*
-	for (var/obj/machinery/computer/communications/comm in machines)
+	for (var/obj/machinery/computer/communications/comm in machine_registry[MACHINES_COMMSCONSOLES])
 		if (!(comm.status & (BROKEN | NOPOWER)) && comm.prints_intercept)
 			var/obj/item/paper/intercept = new /obj/item/paper( comm.loc )
 			intercept.name = "paper- 'Cent. Com. Status Summary'"
@@ -299,7 +299,7 @@
 			comm.messagetitle.Add("Cent. Com. Status Summary")
 			comm.messagetext.Add(intercepttext)
 */
-	for (var/obj/machinery/communications_dish/C in machines)
+	for (var/obj/machinery/communications_dish/C in comm_dishes)
 		if(! (C.status & (BROKEN|NOPOWER) ) )
 			C.messagetitle.Add("Cent. Com. Status Summary")
 			C.messagetext.Add(intercepttext)

@@ -127,7 +127,7 @@
 			explanation_text = "Make sure all furnaces on the station are active at the end of the round."
 			medal_name = "Slow Burn"
 			check_completion()
-				for(var/obj/machinery/power/furnace/F in machines)
+				for(var/obj/machinery/power/furnace/F in machine_registry[MACHINES_POWER])
 					if(F.z == 1 && F.active == 1)
 						return 1
 				return 0
@@ -197,7 +197,7 @@
 			medal_name = "Bill Masen"
 			check_completion()
 				var/mutcount = 0
-				for(var/obj/machinery/plantpot/PP in machines)
+				for(var/obj/machinery/plantpot/PP in machine_registry[MACHINES_PLANTPOTS])
 					if(PP.current)
 						var/datum/plantgenes/DNA = PP.plantgenes
 						var/datum/plantmutation/MUT = DNA.mutation
@@ -219,7 +219,7 @@
 				for (var/obj/item/seed/cannabis/S in world)
 					if (istype(get_area(S), /area/station/hydroponics) || istype(get_area(S), /area/station/hydroponics/lobby))
 						return 0
-				for (var/obj/machinery/plantpot/PP in machines)
+				for (var/obj/machinery/plantpot/PP in machine_registry[MACHINES_PLANTPOTS])
 					if (PP.current && istype(PP.current, /datum/plant/cannabis))
 						if (istype(get_area(PP), /area/station/hydroponics) || istype(get_area(PP), /area/station/hydroponics/lobby))
 							return 0
@@ -291,7 +291,7 @@
 			medal_name = "It's not 'Door to Heaven'"
 			check_completion()
 				var/telecount = 0
-				for(var/obj/machinery/teleport/portal_generator/S in machines) //really shitty, I know
+				for(var/obj/machinery/teleport/portal_generator/S in machine_registry[MACHINES_PORTALGENERATORS]) //really shitty, I know
 					if(S.z != 1) continue
 					for(var/obj/machinery/teleport/portal_ring/H in orange(2,S))
 						for(var/obj/machinery/computer/teleporter/C in orange(2,S))
@@ -304,7 +304,7 @@
 			explanation_text = "Ensure that there are at least two cloners on the station level at the end of the round."
 			check_completion()
 				var/clonecount = 0
-				for(var/obj/machinery/computer/cloning/C in machines) //ugh
+				for(var/obj/machinery/computer/cloning/C in machine_registry[MACHINES_CLONINGCONSOLES]) //ugh
 					for(var/obj/machinery/dna_scannernew/D in orange(2,C))
 						for(var/obj/machinery/clonepod/P in orange(2,C))
 							clonecount++
@@ -412,13 +412,13 @@
 			explanation_text = "Ensure that the Head Surgeon escapes on the shuttle."
 			medal_name = "What's this box doing here?"
 			check_completion()
-				for (var/obj/machinery/bot/medbot/head_surgeon/H in world)
+				for (var/obj/machinery/bot/medbot/head_surgeon/H in machine_registry[MACHINES_BOTS])
 					if (istype(get_area(H),map_settings.escape_centcom))
 						return 1
-				for (var/obj/item/clothing/suit/cardboard_box/head_surgeon/H in world)
+				for (var/obj/item/clothing/suit/cardboard_box/head_surgeon/H in machine_registry[MACHINES_BOTS])
 					if (istype(get_area(H),map_settings.escape_centcom))
 						return 1
-				for (var/obj/machinery/bot/medbot/head_surgeon/H in world)
+				for (var/obj/machinery/bot/medbot/head_surgeon/H in machine_registry[MACHINES_BOTS])
 					if (istype(get_area(H),map_settings.escape_centcom))
 						return 1
 				return 0
@@ -426,7 +426,7 @@
 			explanation_text = "Have at least 5 people's DNA scanned in the cloning console at the end of the round."
 			medal_name = "Life, uh... finds a way"
 			check_completion()
-				for(var/obj/machinery/computer/cloning/C in machines)
+				for(var/obj/machinery/computer/cloning/C in machine_registry[MACHINES_CLONINGCONSOLES])
 					if(C.records.len > 4)
 						return 1
 				return 0
@@ -444,7 +444,7 @@
 			medal_name = "Silent Running"
 			check_completion()
 				var/medbots = 0
-				for (var/obj/machinery/bot/medbot/M in machines)
+				for (var/obj/machinery/bot/medbot/M in machine_registry[MACHINES_BOTS])
 					if (M.z == 1)
 						medbots++
 				if (medbots > 4) return 1
@@ -454,7 +454,7 @@
 			medal_name = "Puerile humour"
 			check_completion()
 				var/buttbots = 0
-				for(var/obj/machinery/bot/buttbot/B in machines)
+				for(var/obj/machinery/bot/buttbot/B in machine_registry[MACHINES_BOTS])
 					if(B.z == 1)
 						buttbots ++
 				if(buttbots > 4) return 1
@@ -498,7 +498,7 @@
 			explanation_text = "Have at least 5 people's DNA scanned in the cloning console at the end of the round."
 			medal_name = "Life, uh... finds a way"
 			check_completion()
-				for(var/obj/machinery/computer/cloning/C in machines)
+				for(var/obj/machinery/computer/cloning/C in machine_registry[MACHINES_CLONINGCONSOLES])
 					if(C.records.len > 4)
 						return 1
 				return 0
@@ -519,7 +519,7 @@
 			medal_name = "Silent Running"
 			check_completion()
 				var/medbots = 0
-				for (var/obj/machinery/bot/medbot/M in machines)
+				for (var/obj/machinery/bot/medbot/M in machine_registry[MACHINES_BOTS])
 					if (M.z == 1)
 						medbots++
 				if (medbots > 4) return 1
@@ -529,7 +529,7 @@
 			medal_name = "Puerile humour"
 			check_completion()
 				var/buttbots = 0
-				for(var/obj/machinery/bot/buttbot/B in machines)
+				for(var/obj/machinery/bot/buttbot/B in machine_registry[MACHINES_BOTS])
 					if(B.z == 1)
 						buttbots ++
 				if(buttbots > 4) return 1
@@ -637,10 +637,10 @@
 			explanation_text = "Ensure that the Head Surgeon escapes on the shuttle."
 			medal_name = "What's this box doing here?"
 			check_completion()
-				for (var/obj/machinery/bot/medbot/head_surgeon/H in world)
+				for (var/obj/machinery/bot/medbot/head_surgeon/H in machine_registry[MACHINES_BOTS])
 					if (istype(get_area(H),map_settings.escape_centcom))
 						return 1
-				for (var/obj/item/clothing/suit/cardboard_box/head_surgeon/H in world)
+				for (var/obj/item/clothing/suit/cardboard_box/head_surgeon/H in machine_registry[MACHINES_BOTS])
 					if (istype(get_area(H),map_settings.escape_centcom))
 						return 1
 				return 0
@@ -707,9 +707,9 @@
 			explanation_text = "Ensure that the Head Surgeon escapes on the shuttle."
 			medal_name = "What's this box doing here?"
 			check_completion()
-				for (var/obj/machinery/bot/medbot/head_surgeon/H in world)
+				for (var/obj/machinery/bot/medbot/head_surgeon/H in machine_registry[MACHINES_BOTS])
 					if (istype(get_area(H),map_settings.escape_centcom)) return 1
-				for (var/obj/item/clothing/suit/cardboard_box/head_surgeon/H in world)
+				for (var/obj/item/clothing/suit/cardboard_box/head_surgeon/H in machine_registry[MACHINES_BOTS])
 					if (istype(get_area(H),map_settings.escape_centcom)) return 1
 				return 0
 

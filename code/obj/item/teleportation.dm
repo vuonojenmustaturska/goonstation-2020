@@ -164,7 +164,7 @@ Frequency:
 		if (random_turfs && random_turfs.len)
 			L["None (Dangerous)"] += pick(random_turfs)
 
-		for(var/obj/machinery/teleport/portal_generator/PG in machines)
+		for(var/obj/machinery/teleport/portal_generator/PG in machine_registry[MACHINES_PORTALGENERATORS])
 			if (!PG.linked_computer || !PG.linked_rings)
 				continue
 			var/turf/PG_loc = get_turf(PG)

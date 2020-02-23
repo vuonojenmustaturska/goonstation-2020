@@ -259,7 +259,7 @@
 
 		vaquero
 			name = "El Vaquero"
-			desc = "The side label reads 'Fabricado en México'"
+			desc = "The side label reads 'Fabricado en Mï¿½xico'"
 			setup_unique_name = 1
 			setup_default_startup_task = /datum/computer/file/guardbot_task/security/patrol
 			setup_charge_percentage = 98
@@ -1638,7 +1638,7 @@
 			if (src.its_beepsky) //Huh? We haven't lost him.
 				return
 
-			for (var/obj/machinery/bot/secbot/possibly_beepsky in machines)
+			for (var/obj/machinery/bot/secbot/possibly_beepsky in machine_registry[MACHINES_BOTS])
 				if (ckey(possibly_beepsky.name) == "officerbeepsky")
 					src.its_beepsky = possibly_beepsky //Definitely beepsky in this case.
 					break
@@ -3966,7 +3966,7 @@
 			user.visible_message("<span style=\"color:red\"><b>[user]</b> inserts a [W] into the [src].</span>", "<span style=\"color:red\">You insert a [W] into the [src].</span>")
 			qdel(W)
 
-			for (var/obj/machinery/bot/guardbot/buddy in machines)
+			for (var/obj/machinery/bot/guardbot/buddy in machine_registry[MACHINES_BOTS])
 				if (buddy.z != 1) continue
 				if (buddy.charge_dock)
 					buddy.charge_dock.eject_robot()

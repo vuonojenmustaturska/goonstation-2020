@@ -4,7 +4,7 @@
 /obj/machinery/filter_control/New()
 	..()
 	SPAWN_DBG(5 DECI SECONDS)	//wait for world
-		for(var/obj/machinery/inlet/filter/F in machines)
+		for(var/obj/machinery/inlet/filter/F in machine_registry[MACHINES_INLETS])
 			if(F.control == src.control)
 				F.f_mask = src.f_mask
 		desc = "A remote control for a filter: [control]"
@@ -61,7 +61,7 @@
 	var/IGoodConnection = 0
 	var/IBadConnection = 0
 
-	for(var/obj/machinery/inlet/filter/F in machines)
+	for(var/obj/machinery/inlet/filter/F in machine_registry[MACHINES_INLETS])
 		if((F.control == src.control) && !(F.stat && (NOPOWER|BROKEN)))
 			IGoodConnection++
 		else if(F.control == src.control)
@@ -89,13 +89,13 @@
 		return	//Who cares if we're dead or whatever let us close the fucking window
 	if(..())
 		return
-	if ((((get_dist(src, usr) <= 1 || usr.telekinesis == 1) || isAI(usr)) && istype(src.loc, /turf)))
+	if ((((get_dist(src, usr) <= 1 || usr.telekinesis == 1) || isAI(usr)) && isturf(src.loc)))
 		usr.machine = src
 		if (src.allowed(usr) || src.emagged && !(status & BROKEN))
 			if (href_list["tg"])	//someone modified the html so I added a check here
 				// toggle gas
 				src.f_mask ^= text2num(href_list["tg"])
-				for(var/obj/machinery/inlet/filter/FI in machines)
+				for(var/obj/machinery/inlet/filter/FI in machine_registry[MACHINES_INLETS])
 					if(FI.control == src.control)
 						FI.f_mask ^= text2num(href_list["tg"])
 		else
@@ -125,7 +125,7 @@
 			return
 
 	var/GoodConnection = 0
-	for(var/obj/machinery/inlet/filter/F in machines)
+	for(var/obj/machinery/inlet/filter/F in machine_registry[MACHINES_INLETS])
 		if((F.control == src.control) && !(F.stat && (NOPOWER|BROKEN)))
 			GoodConnection++
 			break

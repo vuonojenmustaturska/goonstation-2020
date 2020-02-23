@@ -377,6 +377,7 @@ var/list/status_display_text_images = list()
 	mats = 14
 	deconstruct_flags = DECON_SCREWDRIVER | DECON_WRENCH | DECON_CROWBAR | DECON_WELDER | DECON_MULTITOOL
 
+	machine_registry_idx = MACHINES_STATUSDISPLAYS
 	var/mode = 0	// 0 = Blank
 					// 1 = AI emoticon
 					// 2 = Blue screen of death

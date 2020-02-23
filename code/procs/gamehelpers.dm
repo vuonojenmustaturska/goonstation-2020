@@ -64,7 +64,7 @@ var/list/stinkThingies = list("ass","taint","armpit","excretions","leftovers","R
 			return APC
 
 	// Lots and lots of APCs use area strings to make the blowout random event possible.
-	for (var/obj/machinery/power/apc/APC2 in machines)
+	for (var/obj/machinery/power/apc/APC2 in machine_registry[MACHINES_POWER])
 		var/area/A2 = null
 		if (!isnull(APC2.areastring))
 			A2 = get_area_name(APC2.areastring)

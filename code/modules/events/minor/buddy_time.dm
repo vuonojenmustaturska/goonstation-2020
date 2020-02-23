@@ -3,7 +3,7 @@
 
 	event_effect()
 		..()
-		for (var/obj/machinery/bot/guardbot/buddy in machines)
+		for (var/obj/machinery/bot/guardbot/buddy in machine_registry[MACHINES_BOTS])
 			if (buddy.z != 1)
 				continue
 

@@ -68,7 +68,7 @@
 
 				SPAWN_DBG(door ? 20 : 10)
 					if (driver)
-						for(var/obj/machinery/mass_driver/D in machines)
+						for(var/obj/machinery/mass_driver/D in machine_registry[MACHINES_MASSDRIVERS])
 							if(D.id == driver.id)
 								D.drive()
 	process()

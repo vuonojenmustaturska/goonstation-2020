@@ -1944,7 +1944,7 @@ var/global/noir = 0
 						for(var/obj/grille/O in world)
 							del(O)
 							LAGCHECK(LAG_LOW)
-						for(var/obj/machinery/vehicle/pod/O in machines)
+						for(var/obj/machinery/vehicle/pod/O in all_processing_machines())
 							for(var/atom/movable/A in O)
 								A.set_loc(O.loc)
 							del(O)

@@ -36,6 +36,7 @@
 	name = "propulsion"
 	icon_state = "propulsion"
 	opacity = 1
+	machine_registry_idx = MACHINES_SHUTTLEPROPULSION
 	var/stat1 = 1
 	var/stat2 = 1
 	var/id = null

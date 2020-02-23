@@ -84,6 +84,7 @@
 	name = "portal generator"
 	desc = "This fancy piece of machinery generates the portal. You can flick it on and off."
 	icon_state = "controller"
+	machine_registry_idx = MACHINES_PORTALGENERATORS
 	var/active = 0
 	var/engaged = 0
 	var/obj/machinery/computer/teleporter/linked_computer = null

@@ -5,6 +5,7 @@
 	density = 1
 	anchored = 1
 
+	machine_registry_idx = MACHINES_MISC
 	var/obj/item/tripod_bulb/bulb = null
 
 	attack_hand(mob/user)

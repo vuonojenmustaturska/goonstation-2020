@@ -176,7 +176,7 @@ var/linenums = 0
 // build the pipelines (THIS HAPPENS ONCE!)
 /proc/makepipelines()
 
-	for(var/obj/machinery/pipes/P in machines)		// look for a pipe
+	for(var/obj/machinery/pipes/P in machine_registry[MACHINES_PIPES])		// look for a pipe
 
 		if(!P.plnum)							// if not already part of a line
 			P.buildnodes(++linenums)			// add it, and spread to all connected pipes
@@ -191,7 +191,7 @@ var/linenums = 0
 
 
 
-	for(var/obj/machinery/pipes/P in machines)		// look for pipes
+	for(var/obj/machinery/pipes/P in machine_registry[MACHINES_PIPES])		// look for pipes
 
 		if(P.termination)						// true if pipe is terminated (ends in blank or a machine)
 			var/obj/machinery/pipeline/PL = plines[P.plnum]		// get the pipeline from the pipe's pl-number
@@ -204,7 +204,7 @@ var/linenums = 0
 
 
 
-	for(var/obj/machinery/pipes/P in machines)		// all pipes
+	for(var/obj/machinery/pipes/P in machine_registry[MACHINES_PIPES])		// all pipes
 		P.setline()								// 	set the pipeline object for this pipe
 
 		if(P.tag == "dbg")		//add debug tag to line containing debug pipe
@@ -217,7 +217,7 @@ var/linenums = 0
 			P.parent.suffix = "d"
 
 
-	for(var/obj/machinery/M in machines)		// for all machines
+	for(var/obj/machinery/M in all_processing_machines)		// for all machines
 		if(M.p_dir)								// which are pipe-connected
 			if(!M.ispipe())						// is not a pipe itself
 				M.buildnodes()					// build the nodes, setting the links to the virtual pipelines
@@ -540,6 +540,9 @@ var/linenums = 0
 /*
 /obj/machinery/pipes/process()
 */
+
+/obj/machinery/pipes
+	machine_registry_idx = MACHINES_PIPES
 
 /obj/machinery/pipes/New()
 
@@ -1734,6 +1737,9 @@ var/linenums = 0
 
 // Filter inlet
 // works with filter_control
+
+/obj/machinery/inlet/filter
+	machine_registry_idx = MACHINES_INLETS
 
 /obj/machinery/inlet/filter/New()
 	..()

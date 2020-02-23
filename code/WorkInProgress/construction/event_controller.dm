@@ -129,7 +129,7 @@
 			command_alert(early_warning_text, early_warning_heading)
 
 	proc/set_up()
-		for (var/obj/machinery/communications_dish/C in machines)
+		for (var/obj/machinery/communications_dish/C in comm_dishes)
 			C.add_centcom_report("[command_name()] Update", warning_text)
 
 		if (!warning_heading)

@@ -5,10 +5,10 @@
 
 	event_effect()
 		..()
-		for(var/obj/machinery/power/apc/C in machines)
+		for(var/obj/machinery/power/apc/C in machine_registry[MACHINES_POWER])
 			if(C.cell && C.z == 1)
 				C.cell.charge = 0
-		for(var/obj/machinery/power/smes/S in machines)
+		for(var/obj/machinery/power/smes/S in machine_registry[MACHINES_POWER])
 			if(istype(get_area(S), /area/station/turret_protected) || S.z != 1)
 				continue
 			S.charge = 0
@@ -24,10 +24,10 @@
 
 	event_effect()
 		..()
-		for(var/obj/machinery/power/apc/C in machines)
+		for(var/obj/machinery/power/apc/C in machine_registry[MACHINES_POWER])
 			if(C.cell && C.z == 1)
 				C.cell.charge = C.cell.maxcharge
-		for(var/obj/machinery/power/smes/S in machines)
+		for(var/obj/machinery/power/smes/S in machine_registry[MACHINES_POWER])
 			if(S.z != 1)
 				continue
 			S.charge = S.capacity

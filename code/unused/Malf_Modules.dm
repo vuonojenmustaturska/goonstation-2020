@@ -49,7 +49,7 @@ rcd light flash thingy on matter drain
 	set category = "AI Modules"
 	set name = "Upgrade Turrets"
 	usr.verbs -= /client/proc/upgrade_turrets
-	for(var/obj/machinery/turret/turret in machines)
+	for(var/obj/machinery/turret/turret in machine_registry[MACHINES_TURRETS])
 		turret.health += 30
 		turret.shot_delay = 20
 
@@ -94,7 +94,7 @@ rcd light flash thingy on matter drain
 	for(var/datum/game_mode/malfunction/AI_Module/small/blackout/blackout in usr:current_modules)
 		if(blackout.uses > 0)
 			blackout.uses --
-			for(var/obj/machinery/power/apc/apc in machines)
+			for(var/obj/machinery/power/apc/apc in machine_registry[MACHINES_POWER])
 				if(prob(30))
 				 apc.overload_lighting()
 		if(blackout.uses <= 0)

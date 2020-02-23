@@ -67,7 +67,7 @@
 	if (!msg)
 		return
 
-	for (var/obj/machinery/bot/guardbot/old/maybeMurray in machines)
+	for (var/obj/machinery/bot/guardbot/old/maybeMurray in machine_registry[MACHINES_BOTS])
 		if (!dd_hasprefix(maybeMurray.name, "Murray"))
 			continue
 
@@ -97,7 +97,7 @@
 
 	// Given that HS can also talk on his own (well, used to be able to)
 	// this should probably be a proc off in world.dm. Maybe. Probably nobody cares.
-	for (var/obj/machinery/bot/medbot/head_surgeon/maybeHS in machines)
+	for (var/obj/machinery/bot/medbot/head_surgeon/maybeHS in machine_registry[MACHINES_BOTS])
 		maybeHS.speak(msg)
 		logTheThing("admin", usr, null, "forced HeadSurgeon to beep: [msg]")
 		logTheThing("diary", usr, null, "forced HeadSurgeon: [msg]", "admin")
@@ -129,7 +129,7 @@
 	if (!msg)
 		return
 
-	for (var/obj/machinery/derelict_aiboss/ai/maybeBrad in machines)
+	for (var/obj/machinery/derelict_aiboss/ai/maybeBrad in machine_registry[MACHINES_BOTS])
 		maybeBrad.speak(msg)
 		break
 

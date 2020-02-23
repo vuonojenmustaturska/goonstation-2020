@@ -105,9 +105,9 @@
 		owner.visible_message("<span style=\"color:blue\">[owner.name] [secstate == 2 ? "un" : ""]secures the camera hookups on the [cam].</span>")
 		cam.securedstate = (secstate == 2) ? 1 : 2
 		if (cam.securedstate != 2)
-			machines.Remove(cam)
+			cam.UnsubscribeProcess()
 		else
-			machines.Add(cam)
+			cam.SubscribeToProcess()
 
 /obj/machinery/camera/television/mobile
 	name = "mobile television camera"
@@ -434,7 +434,7 @@
 ------------------------------------*/
 
 /proc/build_camera_network()
-	connect_camera_list(machines)
+	connect_camera_list(cameras)
 
 /proc/rebuild_camera_network()
 	if(defer_camnet_rebuild || !camnet_needs_rebuild) return

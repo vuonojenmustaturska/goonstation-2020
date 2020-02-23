@@ -222,7 +222,7 @@ var/global/current_state = GAME_STATE_WORLD_INIT
 				message_admins("[key_name(usr ? usr : src)] the automated map switch vote couldn't run because: [e.name]")
 
 	SPAWN_DBG (6000) // 10 minutes in
-		for(var/obj/machinery/power/generatorTemp/E in machines)
+		for(var/obj/machinery/power/generatorTemp/E in machine_registry[MACHINES_POWER])
 			LAGCHECK(LAG_LOW)
 			if (E.lastgen <= 0)
 				command_alert("Reports indicate that the engine on-board [station_name()] has not yet been started. Setting up the engine is strongly recommended, or else stationwide power failures may occur.", "Power Grid Warning")

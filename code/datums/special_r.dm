@@ -387,12 +387,15 @@ EndNote
 
 
 /proc/bust_lights()
-	for(var/obj/machinery/light/lights in machines)
-		if(prob(70))
-			lights.on = 0
-			lights.status = LIGHT_BROKEN
-			lights.update()
-	for(var/obj/machinery/power/apc/apcs in machines)
+	for(var/i in 1 to PROCESSING_MAX_IN_USE) // oh boy
+		for(var/list/machines_list in processing_machines[i])
+			for(var/obj/machinery/light_area_manager/LAM in machines_list)
+				for(var/obj/machinery/light/lights in LAM.lights)
+					if(prob(70))
+						lights.on = 0
+						lights.status = LIGHT_BROKEN
+						lights.update()
+	for(var/obj/machinery/power/apc/apcs in machine_registry[MACHINES_POWER])
 		if(prob(65))
 			apcs.cell.charge-=20
 	return

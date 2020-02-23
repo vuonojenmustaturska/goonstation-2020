@@ -23,6 +23,7 @@
 	var/processing_bucket = 1
 	var/processing_tier = PROCESSING_FULL
 	var/current_processing_tier
+	var/machine_registry_idx // List index for misc. machines registry, used in loops where machines of a specific type are needed
 
 	// New() and disposing() add and remove machines from the global "machines" list
 	// This list is used to call the process() proc for all machines ~1 per second during a round
@@ -30,9 +31,11 @@
 /obj/machinery/New()
 	..()
 
+	if (!isnull(initial(machine_registry_idx))) 	// we can use initial() here to skip a lookup from this instance's vars which we know won't contain this.
+		machine_registry[initial(machine_registry_idx)] += src
+
 	var/static/machines_counter = 0
 	src.processing_bucket = machines_counter++ & 15 // this is just modulo 16 but faster due to power-of-two memes
-	machines += src
 	SubscribeToProcess()
 	if (current_state > GAME_STATE_WORLD_INIT)
 		spawn(5 DECI SECONDS)
@@ -43,7 +46,8 @@
 	src.power_change()
 
 /obj/machinery/disposing()
-	machines -= src
+	if (!isnull(initial(machine_registry_idx)))
+		machine_registry[initial(machine_registry_idx)] -= src
 	UnsubscribeProcess()
 	current_user = null
 	..()
@@ -308,6 +312,7 @@
 	icon_state = "nm n +o"
 	anchored = 1
 	density = 0
+	machine_registry_idx = MACHINES_MISC
 	var/ID = 0
 	var/sound = 0
 	var/broken = 0

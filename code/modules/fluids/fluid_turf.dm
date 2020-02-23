@@ -401,6 +401,7 @@
 /obj/machinery/computer/sea_elevator
 	name = "Elevator Control"
 	icon_state = "shuttle"
+	machine_registry_idx = MACHINES_ELEVATORCOMPS
 	var/active = 0
 	var/location = 1 // 0 for bottom, 1 for top
 
@@ -431,7 +432,7 @@
 
 		if (href_list["send"])
 			if(!active)
-				for(var/obj/machinery/computer/sea_elevator/C in machines)
+				for(var/obj/machinery/computer/sea_elevator/C in machine_registry[MACHINES_ELEVATORCOMPS])
 					active = 1
 					C.visible_message("<span style=\"color:red\">The elevator begins to move!</span>")
 				SPAWN_DBG(5 SECONDS)
@@ -465,7 +466,7 @@
 		start_location.move_contents_to(end_location, /turf/simulated/floor/specialroom/sea_elevator_shaft, ignore_fluid = 1)
 		location = 0
 
-	for(var/obj/machinery/computer/sea_elevator/C in machines)
+	for(var/obj/machinery/computer/sea_elevator/C in machine_registry[MACHINES_ELEVATORCOMPS])
 		active = 0
 		C.visible_message("<span style=\"color:red\">The elevator has moved.</span>")
 		C.location = src.location

@@ -698,7 +698,7 @@ var/list/ai_emotions = list("Happy" = "ai_happy",\
 	src.light.disable()
 	src.update_appearance()
 
-	for(var/obj/machinery/ai_status_display/O in machines) //change status
+	for(var/obj/machinery/ai_status_display/O in machine_registry[MACHINES_STATUSDISPLAYS]) //change status
 		SPAWN_DBG( 0 )
 			O.mode = 2
 
@@ -1228,7 +1228,7 @@ var/list/ai_emotions = list("Happy" = "ai_happy",\
 	update_clothing()
 	src.updateOverlaysClient(src.client) //ov1
 	if (!isdead(src))
-		for (var/obj/machinery/ai_status_display/O in machines) //change status
+		for (var/obj/machinery/ai_status_display/O in machine_registry[MACHINES_STATUSDISPLAYS]) //change status
 			SPAWN_DBG(0)
 				O.mode = 1
 				O.emotion = src.faceEmotion
@@ -1237,7 +1237,7 @@ var/list/ai_emotions = list("Happy" = "ai_happy",\
 /mob/living/silicon/ai/Logout()
 	src.removeOverlaysClient(src.client) //ov1
 	..()
-	for (var/obj/machinery/ai_status_display/O in machines) //change status
+	for (var/obj/machinery/ai_status_display/O in machine_registry[MACHINES_STATUSDISPLAYS]) //change status
 		SPAWN_DBG(0)
 			O.mode = 0
 	return
@@ -1591,7 +1591,7 @@ var/list/ai_emotions = list("Happy" = "ai_happy",\
 		update_appearance()
 	if (newMessage)
 		src.status_message = newMessage
-	for (var/obj/machinery/ai_status_display/AISD in machines) //change status
+	for (var/obj/machinery/ai_status_display/AISD in machine_registry[MACHINES_STATUSDISPLAYS]) //change status
 		SPAWN_DBG(0)
 			if (newEmotion)
 				AISD.emotion = ai_emotions[newEmotion]

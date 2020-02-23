@@ -357,7 +357,7 @@ Code:
 			dat += "<h4>Located Cleanbots:</h4>"
 
 			ldat = null
-			for (var/obj/machinery/bot/cleanbot/B in machines)
+			for (var/obj/machinery/bot/cleanbot/B in machine_registry[MACHINES_BOTS])
 				var/turf/cb = get_turf(B)
 
 				if(!cb || !istype(cb))
@@ -520,9 +520,9 @@ Code:
 		if(..())
 			return
 		if (!laser)
-			laser = locate(/obj/machinery/power/pt_laser) in machines
+			laser = locate() in machine_registry[MACHINES_POWER]
 		if (!generator)
-			generator = locate(/obj/machinery/power/generatorTemp) in machines
+			generator = locate() in machine_registry[MACHINES_POWER]
 		if (!generator || !circ1)
 			circ1 = generator.circ1
 		if (!generator || !circ2)

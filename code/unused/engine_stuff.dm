@@ -5,6 +5,7 @@
 	desc = "This is what it is."
 	icon = 'engine_stuff.dmi'
 	icon_state = "engine_laser_spawner0"
+	machine_registry_idx = MACHINES_MISC
 	var/obj/beam/engine_laser/first = null
 	var/id = 1
 	var/state = 0.0
@@ -369,7 +370,7 @@
 /obj/machinery/computer/laser_computer/New()
 	..()
 	SPAWN_DBG(10 SECONDS)
-		for(var/obj/machinery/engine_laser_spawner/M in machines)
+		for(var/obj/machinery/engine_laser_spawner/M in machine_registry[MACHINES_MISC])
 			if(src.id == M.id)
 				src.emitters += M
 
@@ -475,4 +476,3 @@ text("<A href='?src=\ref[];pattern=1'>[src.pattern]</A>", src))
 /obj/machinery/computer/laser_computer/process()
 	SPAWN_DBG(2 DECI SECONDS)
 		src.updateDialog()
-

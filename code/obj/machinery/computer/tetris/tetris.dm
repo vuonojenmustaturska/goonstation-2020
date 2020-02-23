@@ -5,7 +5,7 @@
 		return null
 	else if (!config.medal_hub || !config.medal_password)
 		return null
-	for(var/obj/machinery/computer/tetris/T in machines) // JFC this a world loop before this. aaaAAAAAAA
+	for(var/obj/machinery/computer/tetris/T in machine_registry[MACHINES_MISC]) // JFC this a world loop before this. aaaAAAAAAA
 		if (T.highscore && T.highscorekey)
 			SPAWN_DBG(0)
 				var/list/response = world.GetScores(T.highscorekey, "Tetris", config.medal_hub, config.medal_password)
@@ -37,7 +37,7 @@
 	icon_state = "tetris"
 
 	desc = "Instructions: Left/Right Arrows: move, Up Arrow: turn, Down Arrow: faster, Space: auto place | HIGHSCORE: 0"
-
+	machine_registry_idx = MACHINES_MISC
 	var/highscore = 0
 	var/highscoreholder
 	var/highscorekey

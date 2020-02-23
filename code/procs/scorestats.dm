@@ -80,7 +80,7 @@ var/datum/score_tracker/score_tracker
 		var/clean_areas = 0
 
 		//checking power levels
-		for (var/obj/machinery/power/apc/A in machines)
+		for (var/obj/machinery/power/apc/A in machine_registry[MACHINES_POWER])
 			if (!istype(A.area,/area/station/))
 				continue
 			apc_count++

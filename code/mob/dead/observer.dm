@@ -690,7 +690,7 @@
 			namecounts[name] = 1
 		creatures[name] = L
 
-	for (var/obj/machinery/bot/B in machines)
+	for (var/obj/machinery/bot/B in machine_registry[MACHINES_BOTS])
 		LAGCHECK(LAG_LOW)
 		if (isghostrestrictedz(B.z)) continue
 		var/name = "*[B.name]"
