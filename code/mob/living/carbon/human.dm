@@ -3381,27 +3381,6 @@
 
 		//STEP SOUND HANDLING OVER
 
-		if (prob(1) && prob(50))
-			if (!src.lying && src.shoes && src.shoes.tripsalot)
-				if(istype(src.head, /obj/item/clothing/head))
-					if(src.head.type == /obj/item/clothing/head/helmet)
-						boutput(src, "<span style=\"color:red\">You stumble and fall to the ground. Your oddly shaped head fits poorly in this helmet!</span>")
-						src.setStatus("paralysis", max(rand(50,100), src.getStatusDuration("paralysis")))
-						random_brute_damage(src, 15)
-					else if(istype(src.head, /obj/item/clothing/head/helmet))//for all non sec helmets
-						boutput(src, "<span style=\"color:red\">You stumble and fall to the ground. Thankfully, that helmet protected you.</span>")
-						src.changeStatus("weakened", 3 SECONDS)
-					else if(prob(70))
-						boutput(src, "<span style=\"color:red\">You stumble and fall to the ground. Thankfully, that hat protected you.</span>")
-						src.changeStatus("weakened", 3 SECONDS)
-					else
-						boutput(src, "<span style=\"color:red\">You stumble and hit your head.</span>")
-						src.changeStatus("weakened", 3 SECONDS)
-				else
-					boutput(src, "<span style=\"color:red\">You stumble and hit your head.</span>")
-					src.changeStatus("weakened", 5 SECONDS)
-					src.stuttering = max(rand(0,3), src.stuttering)
-
 		if (prob(5)) // Handling tied or cut shoelaces courtesy of /obj/item/gun/energy/pickpocket
 			if (src.shoes && src.m_intent == "run" && src.shoes.laces != LACES_NORMAL)
 				if (src.shoes.laces == LACES_TIED) // Laces tied

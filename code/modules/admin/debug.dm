@@ -333,7 +333,7 @@ var/global/debug_messages = 0
 				listargs += input("Enter new number:","Num", 0) as null|num
 
 			if ("type")
-				listargs += input("Enter type:","Type", null) in null|typesof(/obj,/mob,/area,/turf)
+				listargs += input("Enter type:","Type", null) in null|typesof(/obj,/mob,/area,/turf,/datum/component)
 
 			if ("reference")
 				listargs += input("Select reference:","Reference", null) as null|mob|obj|turf|area in world

@@ -25,7 +25,6 @@
 	var/step_lots = 0 //classic steps (used for clown shoos)
 
 	var/speedy = 0 		//for industrial booties, to avoid type checks on shoe
-	var/tripsalot = 0 	//for clown shooties, to avoid type checks on shoe
 	var/magnetic = 0    //for magboots, to avoid type checks on shoe
 
 	setupProperties()
@@ -248,7 +247,10 @@
 	module_research = list("audio" = 5)
 	step_lots = 1
 	step_priority = 999
-	tripsalot = 1
+
+/obj/item/clothing/shoes/clown_shoes/New()
+	. = ..()
+	AddComponent(/datum/component/wearertargeting/tripsalot, list("shoes"))
 
 /obj/item/clothing/shoes/flippers
 	name = "flippers"

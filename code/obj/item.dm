@@ -735,10 +735,14 @@
 	return
 
 /obj/item/proc/equipped(var/mob/user, var/slot)
-	return
+	#ifdef COMSIG_ITEM_EQUIPPED
+	SEND_SIGNAL(src, COMSIG_ITEM_EQUIPPED, user, slot)
+	#endif
 
 /obj/item/proc/unequipped(var/mob/user)
-	return
+	#ifdef COMSIG_ITEM_UNEQUIPPED
+	SEND_SIGNAL(src, COMSIG_ITEM_UNEQUIPPED, user)
+	#endif
 
 /obj/item/proc/afterattack(atom/target, mob/user, reach, params)
 	return
